@@ -12,7 +12,7 @@ library(terra)
 library(here)
 
 # system.time(buildings <- st_read(here("nightlight/buildings.geojson")))
-system.time(buildings <- geojson_sf(here("nightlight/buildings.geojson")))
+system.time(buildings <- geojson_sf(here("external/data/buildings.geojson")))
 
 sf_use_s2(FALSE)
 buildings <- buildings %>%
