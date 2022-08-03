@@ -1,4 +1,5 @@
-# create gridded population raster from NYC census data
+# create gridded population raster from NYC census data, as well as grid of
+# percentages of public housing
 
 library(sf)
 library(dplyr)
@@ -8,7 +9,7 @@ library(terra)
 # NYC population raster
 nytract <- readRDS(system.file("extdata/nytract.RDS", package = "USFlite"))
 ny_pop <- readRDS(system.file("extdata/ny_pop.RDS", package = "USFlite"))
-
+nycha <- readRDS(system.file("extdata/nycha.RDS", package = "USFlite"))
 
 # Add area to census tracts then join population data
 nytract_pop <- nytract %>%
@@ -40,7 +41,6 @@ r_pop_vals <- tracts_cut %>% group_by(cid) %>% st_drop_geometry() %>%
 # tracts_cut %>% slice(1:100) %>% select(cid) %>% plot()
 # tracts_cut %>% filter(cid == 216) %>% select(area) %>% plot()
 
-
 cids <- values(r)[!is.na(values(r))]
 # plot(p$geometry)
 # plot(p %>% filter(`2012-2021` == cids[!cids %in% r_pop_vals$cid]), add = TRUE,
@@ -51,9 +51,24 @@ popr <- subst(r, from = r_pop_vals$cid, to = r_pop_vals$pop)
 popr[popr == cids[!cids %in% r_pop_vals$cid]] <- 0
 plot(popr)
 
-
 # Convert population to integer
 popr[] <- as.integer(popr[])
 
 writeRaster(popr, filename = "inst/extdata/nyc_pop.tif",
             overwrite = TRUE)
+# popr <- rast("inst/extdata/nyc_pop.tif")
+
+# Create raster with proportion of pixel covered by public housing
+city_background <- popr
+city_background[city_background >= 0] <- 0
+
+ph_fraction <- exactextractr::coverage_fraction(
+  raster::raster(r), st_combine(nycha)
+)[[1]]
+ph_fraction[is.na(ph_fraction)] <- 0
+ph_fraction <- mask(rast(ph_fraction), city_background)
+# plot(ph_fraction)
+
+writeRaster(ph_fraction, filename = "inst/extdata/nyc_ph_coverage.tif",
+            overwrite = TRUE)
+
