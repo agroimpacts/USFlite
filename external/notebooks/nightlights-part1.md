@@ -48,6 +48,7 @@ nlights <- rast(sysfiles("nightlights.tif"))
 nlight_mo <- rast(sysfiles("nightlights_mean_month.tif"))
 nlights <- rast(sysfiles("nightlights.tif"))
 nlight_lt <- rast(sysfiles("nightlights_mean.tif"))
+names(nlight_lt) <- "brightness"
 nl_dates <- readRDS(sysfiles("nightlight_dates.rds"))
 ```
 
@@ -66,7 +67,7 @@ brightness of NYC lights between the years 2012 - and 2021.
 
 ``` r
 p <- ggplot(as.data.frame(nlight_lt, xy = TRUE)) + 
-  geom_raster(aes(x = x, y = y, fill = X2012.2021)) +
+  geom_raster(aes(x = x, y = y, fill = brightness)) +
   geom_sf(data = nyc, fill = "transparent", col = "yellow", size = 0.2) +
   geom_sf(data = polo, col = "blue") + 
   geom_sf(data = st_buffer(polo, dist = 2000), fill = "transparent", 
