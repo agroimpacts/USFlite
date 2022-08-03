@@ -55,7 +55,7 @@ knitr::include_graphics(
 
 We are going to use a version of the public housing dataset that is gridded to match the resolution of the nightlights data. We will combine that with US Census population data gridded to match the same resolution, as well as an estimate of the total building volume in each grid cell (derived from NY's building footprint data), which measures how much potential living space there is and the structure of the built environment.
 
-```{r, fig.height=3, fig.width=6.5}
+```{r, fig.height=4, fig.width=9}
 rs <- c(nyc_phfrac * 100, buildings$vol, nycpop, mask(nlight_lt, nycpop))
 names(rs) <- c("ph", "volume", "population", 
                "radiance")
