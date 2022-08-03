@@ -1,7 +1,7 @@
 Package: USFlite
 Title: USF Summer Institute lite package
-Version: 0.0.0.9000
-Authors: Pilar Delpino Marimon
+Version: 0.0.1
+Authors: Pilar Delpino Marimon, Lyndon Estes
 Maintainer: Pilar Delpino Marimon <pdelpinomarimon@clarku.edu>
 Description: Contains data prepared for the 2022 USF summer institute.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
