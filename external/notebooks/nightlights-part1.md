@@ -19,13 +19,13 @@ question represents a single pixel in the night lights dataset.
 
 We will first start by loading the data we need:
 
--   A set of images representing the time series of monthly night lights
-    data over New York City covering the period 2012-2021, as well as
-    the monthly average over the period and the average of each month
-    during the 10 year period.
--   The location of the Polo Grounds public housing project in NYC.
--   Data showing where NYC’s public housing projects are located
--   Census tracts for New York City
+- A set of images representing the time series of monthly night lights
+  data over New York City covering the period 2012-2021, as well as the
+  monthly average over the period and the average of each month during
+  the 10 year period.
+- The location of the Polo Grounds public housing project in NYC.
+- Data showing where NYC’s public housing projects are located
+- Census tracts for New York City
 
 ``` r
 sysfiles <- function(x) {
@@ -57,7 +57,7 @@ nl_dates <- readRDS(sysfiles("nightlight_dates.rds"))
 The map below shows New York City’s public housing developments, with
 the location of the Polo Grounds project shown in red.
 
-![](figures/nyc_housing.png)<!-- -->
+<img src="figures/nyc_housing.png" width="2100" />
 
 ### Night lights data over NYC
 
@@ -121,6 +121,12 @@ p <- ggplot() +
   scale_x_date(date_breaks = "6 months", date_labels = "%Y-%m") + 
   theme_linedraw() + 
   theme(axis.text.x = element_text(angle=90))
+```
+
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+
+``` r
 p
 ```
 

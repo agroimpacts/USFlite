@@ -10,12 +10,12 @@ similar areas without public housing.
 
 We need the following data for this exercise:
 
--   The monthly average night lights between 2012-2021, averaged for
-    each of the 12 months and across all months in the time series.
--   The NYC public housing building footprints
--   Gridded population data for NYC for 2020
--   Gridded coverage of public housing
--   Gridded data describing the volume of buildings in NYC
+- The monthly average night lights between 2012-2021, averaged for each
+  of the 12 months and across all months in the time series.
+- The NYC public housing building footprints
+- Gridded population data for NYC for 2020
+- Gridded coverage of public housing
+- Gridded data describing the volume of buildings in NYC
 
 ``` r
 sysfiles <- function(x) {
@@ -41,7 +41,7 @@ buildings <- rast(sysfiles("nyc_building_dims.tif"))
 
 Another look again at the map from the previous example, showing where
 NYC’s public housing is found.  
-![](figures/nyc_housing.png)<!-- -->
+<img src="figures/nyc_housing.png" width="2100" />
 
 We are going to use a version of the public housing dataset that is
 gridded to match the resolution of the nightlights data. We will combine
